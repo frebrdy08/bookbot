@@ -1,4 +1,5 @@
 import sys
+from stats import get_num_words
 
 def main():
     syscheck()
@@ -13,10 +14,7 @@ def main():
 def get_book_text(path):
     with open(path) as f:
         return f.read()
-    
-def get_num_words(text):
-    words_list = text.split()
-    return len(words_list)
+
 
 def character_count(text):
     character_dict = {}
@@ -43,13 +41,13 @@ def filter_list(char_dict):
 
 def get_report(char_dict, num_words, book_path):
     filtered_chars = filter_list(char_dict)
-    output_string = f"---Begin report of {book_path} ---\n"
-    output_string += f"{num_words} words found in the document \n\n"
+    output_string = f"============ BOOKBOT ============\nAnalyzing book found at {book_path} ---\n----------- Word Count ----------\n"
+    output_string += f"Found {num_words} total words \n--------- Character Count -------\n"
     for mini_dict in filtered_chars:
         character = mini_dict["character"]
         count = mini_dict["count"]
-        output_string += f"The '{character}' character was found {count} times\n"
-    output_string += "--- End Report ---"
+        output_string += f"{character}: {count}\n"
+    output_string += "============= END ==============="
     return output_string
 
 def syscheck():
