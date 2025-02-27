@@ -1,6 +1,8 @@
-def main():
+import sys
 
-    book_path = "books/frankenstein.txt"
+def main():
+    syscheck()
+    book_path = sys.argv[1]
     text_of_book = get_book_text(book_path)
     characters = character_count(text_of_book)
     num_words = get_num_words(text_of_book)
@@ -49,5 +51,10 @@ def get_report(char_dict, num_words, book_path):
         output_string += f"The '{character}' character was found {count} times\n"
     output_string += "--- End Report ---"
     return output_string
+
+def syscheck():
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
 
 main()
